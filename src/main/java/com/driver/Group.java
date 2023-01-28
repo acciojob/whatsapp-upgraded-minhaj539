@@ -7,6 +7,10 @@ public class Group {
 
     private String admin;
 
+
+    public Group() {
+    }
+
     public Group(List<User> userList) {
         this.userList = userList;
     }

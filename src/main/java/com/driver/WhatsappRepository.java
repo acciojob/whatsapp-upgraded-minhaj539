@@ -44,7 +44,7 @@ public class WhatsappRepository {
         message.setId(msgCnt);
         message.setTimestamp(new Date());
         messageDb.add(message);
-        return messageDb.size();
+        return msgCnt;
     }
 
     public int sendMessage(Message message, User sender, Group group) throws Exception{

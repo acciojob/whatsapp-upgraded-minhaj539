@@ -7,6 +7,9 @@ public class Message {
     private String content;
     private Date timestamp;
 
+    public Message() {
+    }
+
     public Message(String content) {
         this.content = content;
     }
