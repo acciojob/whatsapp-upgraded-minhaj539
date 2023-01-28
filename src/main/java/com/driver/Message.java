@@ -14,6 +14,11 @@ public class Message {
         this.content = content;
     }
 
+    public Message(String content, int msgCnt) {
+        this.content=content;
+        this.id=msgCnt;
+    }
+
     public int getId() {
         return id;
     }

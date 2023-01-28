@@ -40,7 +40,7 @@ public class WhatsappRepository {
 
     public int createMessage(String content) {
         msgCnt++;
-        Message message=new Message(content);
+        Message message=new Message(content,msgCnt);
         message.setId(msgCnt);
         message.setTimestamp(new Date());
         messageDb.add(message);
