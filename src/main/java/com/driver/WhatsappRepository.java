@@ -21,7 +21,7 @@ public class WhatsappRepository {
     }
 
     public Group createGroup(List<User> users) {
-        Group group=new Group();
+        Group group=new Group(users);
         group.setNumberOfParticipants(users.size());
         if(users.size()==2) {
             group.setName(users.get(1).getName());
@@ -34,16 +34,14 @@ public class WhatsappRepository {
 
         }
         group.setAdmin(users.get(0).getName());
-        group.setUserList(users);
         groupDb.put(group.getName(), group);
         return group;
     }
 
     public int createMessage(String content) {
         msgCnt++;
-        Message message=new Message();
+        Message message=new Message(content);
         message.setId(msgCnt);
-        message.setContent(content);
         message.setTimestamp(new Date());
         messageDb.add(message);
         return messageDb.size();
