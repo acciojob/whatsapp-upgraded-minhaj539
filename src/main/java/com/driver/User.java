@@ -1,5 +1,6 @@
 package com.driver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -7,6 +8,7 @@ public class User {
     private String mobile;
 
     private List<Message> messageList;
+
 
     public List<Message> getMessageList() {
         return messageList;
@@ -19,6 +21,7 @@ public class User {
     public User(String name, String mobile) {
         this.name = name;
         this.mobile = mobile;
+        this.messageList=new ArrayList<>();
     }
 
     public User() {

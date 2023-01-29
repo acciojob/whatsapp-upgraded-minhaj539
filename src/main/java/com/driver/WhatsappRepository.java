@@ -42,6 +42,7 @@ public class WhatsappRepository {
         }
         Group group=new Group(grpName,users.size());
         group.setAdmin(users.get(0).getName());
+        group.setUserList(users);
         groupDb.put(grpName,group);
         return group;
 
@@ -66,7 +67,6 @@ public class WhatsappRepository {
         Group group=groupDb.get(groupName);
 
 
-
             List<User> userList=groupDb.get(groupName).getUserList();
             if(userList==null || !userList.contains(user))  throw new Exception("You are not allowed to send message");
 
@@ -75,7 +75,8 @@ public class WhatsappRepository {
             user.setMessageList(userMessageList);
             userDb.put(user.getName(),user);
 
-            List<Message> messageList=groupDb.get(user).getMessageList();
+          //  List<Message> messageList=groupDb.get(user).getMessageList();
+        List<Message> messageList=groupDb.get(groupName).getMessageList();
             messageList.add(message);
             group.setMessageList(messageList);
             groupDb.put(groupName,group);
