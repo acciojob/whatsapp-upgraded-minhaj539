@@ -1,18 +1,15 @@
 package com.driver;
 
-import java.util.List;
-
 public class User {
     private String name;
     private String mobile;
 
-
-
-
-
     public User(String name, String mobile) {
         this.name = name;
         this.mobile = mobile;
+    }
+
+    public User() {
     }
 
     public String getName() {
