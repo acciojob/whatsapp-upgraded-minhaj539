@@ -73,7 +73,17 @@ public class WhatsappRepository {
             List<Message> userMessageList=user.getMessageList();
             userMessageList.add(message);
             user.setMessageList(userMessageList);
-            userDb.put(user.getName(),user);
+            userDb.put(user.getMobile(),user);
+
+            for(int i=0;i<userList.size();i++){
+                if(userList.get(i).equals(user)){
+                    userList.remove(i);
+                    break;
+                }
+            }
+            userList.add(user);
+            group.setUserList(userList);
+
 
           //  List<Message> messageList=groupDb.get(user).getMessageList();
         List<Message> messageList=groupDb.get(groupName).getMessageList();
@@ -83,7 +93,8 @@ public class WhatsappRepository {
             return messageList.size();
 
 
-      //  return 0;
+
+
 
     }
 
@@ -107,31 +118,7 @@ public class WhatsappRepository {
 
     public int removeUser(User user) throws Exception {
 
-         /*   for(Group group:groupDb.values()){
-            List<User> userList=group.getUserList();
-            for(User userx:userList){
-                if(user.equals(userx)){
-                    if(user.getName().equals(group.getAdmin())) throw new Exception("cant remove admin");
-                    List<Message> messageList = group.getMessageList();
-                    for(Message message:user.getMessageList()) {
-                        if(messageList.contains(message)){
-                            messageList.remove(message);
-                        }
-                        if(messageDb.contains(message)){
-                            messageDb.remove(message);
-                        }
-                    }
-                    group.setMessageList(messageList);
-                    userList.remove(user);
-                    group.setUserList(userList);
-                    groupDb.put(group.getName(), group);
-                    return group.getMessageList().size()+group.getUserList().size()+messageDb.size();
-                    //the updated number of users in the group + the updated number of messages in group + the updated number of overall messages
-                }
-            }
-        }
-        throw new Exception("user not found");*/
-        //return 0;
+
         int cnt=0;
         boolean isPresent=false;
         for(Group group:groupDb.values()){
@@ -166,10 +153,10 @@ public class WhatsappRepository {
                             group.setUserList(userList);
                             groupDb.put(group.getName(), group);
                         }
-                      cnt+=messageDb.size()+group.getMessageList().size()+group.getUserList().size();
+                      cnt=group.getUserList().size()+group.getMessageList().size()+messageDb.size();
+                        break;
                     }
                 }
-
             }
         }
         if(isPresent==false) throw new Exception("User not found");
