@@ -8,11 +8,20 @@ import java.util.*;
 public class WhatsappRepository {
 
 
-    Map<String,User> userDb=new HashMap<>();
-    Map<String,Group> groupDb=new HashMap<>();
+    Map<String,User> userDb;
+    Map<String,Group> groupDb;
 
-    List<Message> messageDb=new ArrayList<>();
-    int groupCnt=0,msgCnt=0;
+    List<Message> messageDb;
+    int groupCnt;
+    int msgCnt;
+
+    public WhatsappRepository(){
+        userDb=new HashMap<>();
+        groupDb=new HashMap<>();
+        messageDb=new ArrayList<>();
+        groupCnt=0;
+        msgCnt=0;
+    }
     public String createUser(String name, String mobile) {
 
         User user=new User(name,mobile);
