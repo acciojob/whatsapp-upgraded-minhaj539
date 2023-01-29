@@ -21,7 +21,7 @@ public class WhatsappRepository {
     }
 
     public Group createGroup(List<User> users) {
-        Group group=new Group(users);
+      /*  Group group=new Group(users);
         group.setNumberOfParticipants(users.size());
         if(users.size()==2) {
             group.setName(users.get(1).getName());
@@ -35,35 +35,61 @@ public class WhatsappRepository {
         }
         group.setAdmin(users.get(0).getName());
         groupDb.put(group.getName(), group);
+        return group;*/
+
+        String grpName;
+
+        if(users.size()==2){
+            grpName=users.get(1).getName();
+        }
+        else{
+            groupCnt++;
+            grpName="group "+groupCnt;
+        }
+        Group group=new Group(grpName,users.size());
+        group.setAdmin(users.get(0).getName());
+        group.setUserList(users);
+        groupDb.put(grpName,group);
         return group;
     }
 
     public int createMessage(String content) {
         msgCnt++;
         Message message=new Message(content,msgCnt);
-        message.setId(msgCnt);
         message.setTimestamp(new Date());
         messageDb.add(message);
         return msgCnt;
     }
 
-    public int sendMessage(Message message, User sender, Group group) throws Exception{
-     /*          String grpName= group.getName();
-            if (!groupDb.containsKey(grpName)) throw new Exception("group not exist");
+    public int sendMessage(Message messagex, User senderx, Group groupx) throws Exception{
+        int msgId=messagex.getId();
+        String senderName= senderx.getName();
+        String groupName= groupx.getName();
+        if (!groupDb.containsKey(groupName)) throw new Exception("group not exist");
+
+        Message message=messageDb.get(msgId);
+        User user=userDb.get(senderName);
+        Group group=groupDb.get(groupName);
 
 
-            List<User> userList=groupDb.get(grpName).getUserList();
-            if(!userList.contains(sender))  throw new Exception("user not exist in group");
-            List<Message> userMessageList=sender.getMessageList();
+
+
+
+
+            List<User> userList=groupDb.get(groupName).getUserList();
+            if(!userList.contains(user))  throw new Exception("user not exist in group");
+
+            List<Message> userMessageList=user.getMessageList();
             userMessageList.add(message);
-            sender.setMessageList(userMessageList);
-            userDb.put(sender.getName(),sender);
-            List<Message> messageList=groupDb.get(grpName).getMessageList();
+            user.setMessageList(userMessageList);
+            userDb.put(user.getName(),user);
+
+            List<Message> messageList=groupDb.get(user).getMessageList();
             messageList.add(message);
             group.setMessageList(messageList);
-            groupDb.put(grpName,group);
-            return messageList.size();*/
-        return 0;
+            groupDb.put(groupName,group);
+            return messageList.size();
+
 
     }
 

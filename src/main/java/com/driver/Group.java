@@ -6,7 +6,10 @@ public class Group {
     private String name;
 
     private String admin;
+    private int numberOfParticipants;
 
+    List<User> userList;
+    List<Message> messageList;
 
     public Group() {
     }
@@ -27,9 +30,9 @@ public class Group {
         this.admin = admin;
     }
 
-    private int numberOfParticipants;
 
-    List<User> userList;
+
+
 
     public List<User> getUserList() {
         return userList;
@@ -39,7 +42,7 @@ public class Group {
         this.userList = userList;
     }
 
-    List<Message> messageList;
+
 
     public List<Message> getMessageList() {
         return messageList;
