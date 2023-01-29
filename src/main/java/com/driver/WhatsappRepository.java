@@ -12,6 +12,7 @@ public class WhatsappRepository {
     Map<String,Group> groupDb;
 
     List<Message> messageDb;
+
     int groupCnt;
     int msgCnt;
 
@@ -23,33 +24,14 @@ public class WhatsappRepository {
         msgCnt=0;
     }
     public String createUser(String name, String mobile) {
+      User user=new User(name,mobile);
+      userDb.put(mobile,user);
+      return "success";
 
-        User user=new User(name,mobile);
-        userDb.put(name,user);
-        return "created";
     }
 
     public Group createGroup(List<User> users) {
-      /*
-      /////  Group group=new Group(users);
-
-        group.setNumberOfParticipants(users.size());
-        if(users.size()==2) {
-            group.setName(users.get(1).getName());
-
-        }
-        if (users.size() > 2) {
-            groupCnt++;
-            group.setName("group" + groupCnt);
-
-
-        }
-        group.setAdmin(users.get(0).getName());
-        groupDb.put(group.getName(), group);
-        return group;////
-
         String grpName;
-
         if(users.size()==2){
             grpName=users.get(1).getName();
         }
@@ -59,21 +41,20 @@ public class WhatsappRepository {
         }
         Group group=new Group(grpName,users.size());
         group.setAdmin(users.get(0).getName());
-        group.setUserList(users);
         groupDb.put(grpName,group);
         return group;
 
-       */
-        return null;
+
+      //  return null;
     }
 
     public int createMessage(String content) {
-       /* msgCnt++;
-        Message message=new Message(content,msgCnt);
+        msgCnt++;
+        Message message=new Message(msgCnt,content);
         message.setTimestamp(new Date());
         messageDb.add(message);
-        return msgCnt;*/
-        return 0;
+        return msgCnt;
+        //return 0;
     }
 
     public int sendMessage(Message messagex, User senderx, Group groupx) throws Exception{
