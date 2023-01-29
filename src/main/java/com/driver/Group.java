@@ -11,6 +11,10 @@ public class Group {
     public Group() {
     }
 
+    public Group(String grpName,int numberOfParticipants){
+        this.name=grpName;
+        this.numberOfParticipants=numberOfParticipants;
+    }
     public Group(List<User> userList) {
         this.userList = userList;
     }

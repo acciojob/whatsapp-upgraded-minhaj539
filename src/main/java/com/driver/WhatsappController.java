@@ -45,7 +45,7 @@ public class WhatsappController {
     }
 
     @PostMapping("/add-message")
-    public int createMessage(String content){
+    public int createMessage(@RequestParam("content") String content){
         // The 'i^th' created message has message id 'i'.
         // Return the message id.
 
@@ -53,7 +53,7 @@ public class WhatsappController {
     }
 
     @PutMapping("/send-message")
-    public int sendMessage(Message message, User sender, Group group) throws Exception{
+    public int sendMessage(@RequestBody Message message,@RequestBody User sender,@RequestBody Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
