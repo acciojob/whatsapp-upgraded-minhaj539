@@ -88,12 +88,12 @@ public class WhatsappRepository {
 
     public String changeAdmin(User approver, User user, Group group) throws Exception {
       String grpName=group.getName();
-      if(!groupDb.containsKey(grpName)) throw new Exception("group not exist");
+      if(!groupDb.containsKey(grpName)) throw new Exception("Group does not exist");
       String grpAdmin=group.getAdmin();
-      if(!approver.getName().equals(grpAdmin)) throw new Exception("not an admin");
+      if(!approver.getName().equals(grpAdmin)) throw new Exception("Approver does not have rights");
       List<User> userList=groupDb.get(grpName).getUserList();
-      if(!userList.contains(user)) throw new Exception("user not exist");
-      if(user.getName().equals(grpAdmin)) throw new Exception("user is admin");
+      if(!userList.contains(user)) throw new Exception("User is not a participant");
+      //if(user.getName().equals(grpAdmin)) throw new Exception("user is admin");
 
       String newAdmin=user.getName();
       group.setAdmin(newAdmin);
