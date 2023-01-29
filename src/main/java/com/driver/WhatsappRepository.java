@@ -23,10 +23,11 @@ public class WhatsappRepository {
         groupCnt=0;
         msgCnt=0;
     }
-    public String createUser(String name, String mobile) {
+    public String createUser(String name, String mobile) throws Exception {
+        if(userDb.containsKey(mobile)) throw new Exception("User already exists");
       User user=new User(name,mobile);
       userDb.put(mobile,user);
-      return "success";
+      return "SUCCESS";
 
     }
 
@@ -44,8 +45,6 @@ public class WhatsappRepository {
         groupDb.put(grpName,group);
         return group;
 
-
-      //  return null;
     }
 
     public int createMessage(String content) {
@@ -54,26 +53,22 @@ public class WhatsappRepository {
         message.setTimestamp(new Date());
         messageDb.add(message);
         return msgCnt;
-        //return 0;
     }
 
     public int sendMessage(Message messagex, User senderx, Group groupx) throws Exception{
-       /* int msgId=messagex.getId();
-        String senderName= senderx.getName();
+        int msgId=messagex.getId();
+        String senderMob= senderx.getMobile();
         String groupName= groupx.getName();
-        if (!groupDb.containsKey(groupName)) throw new Exception("group not exist");
+        if (!groupDb.containsKey(groupName)) throw new Exception("group does not exist");
 
         Message message=messageDb.get(msgId);
-        User user=userDb.get(senderName);
+        User user=userDb.get(senderMob);
         Group group=groupDb.get(groupName);
 
 
 
-
-
-
             List<User> userList=groupDb.get(groupName).getUserList();
-            if(!userList.contains(user))  throw new Exception("user not exist in group");
+            if(!userList.contains(user))  throw new Exception("user does not exist in group");
 
             List<Message> userMessageList=user.getMessageList();
             userMessageList.add(message);
@@ -86,13 +81,13 @@ public class WhatsappRepository {
             groupDb.put(groupName,group);
             return messageList.size();
 
-*/
-        return 0;
+
+      //  return 0;
 
     }
 
     public String changeAdmin(User approver, User user, Group group) throws Exception {
-     /* String grpName=group.getName();
+      String grpName=group.getName();
       if(!groupDb.containsKey(grpName)) throw new Exception("group not exist");
       String grpAdmin=group.getAdmin();
       if(!approver.getName().equals(grpAdmin)) throw new Exception("not an admin");
@@ -100,15 +95,18 @@ public class WhatsappRepository {
       if(!userList.contains(user)) throw new Exception("user not exist");
       if(user.getName().equals(grpAdmin)) throw new Exception("user is admin");
 
-      User newAdmin=userList.get();
-      */
+      String newAdmin=user.getName();
+      group.setAdmin(newAdmin);
+      groupDb.remove(approver.getName());
+      groupDb.put(newAdmin,group);
 
-        return null;
+
+        return "SUCCESS";
     }
 
     public int removeUser(User user) throws Exception {
 
-        /*    for(Group group:groupDb.values()){
+            for(Group group:groupDb.values()){
             List<User> userList=group.getUserList();
             for(User userx:userList){
                 if(user.equals(userx)){
@@ -131,8 +129,8 @@ public class WhatsappRepository {
                 }
             }
         }
-        throw new Exception("user not found");*/
-        return 0;
+        throw new Exception("user not found");
+        //return 0;
     }
 
     public String findMessage(Date start, Date end, int k) {
