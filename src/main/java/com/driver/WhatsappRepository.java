@@ -68,7 +68,7 @@ public class WhatsappRepository {
 
 
             List<User> userList=groupDb.get(groupName).getUserList();
-            if(!userList.contains(user))  throw new Exception("user does not exist in group");
+            if(userList==null || !userList.contains(user))  throw new Exception("user does not exist in group");
 
             List<Message> userMessageList=user.getMessageList();
             userMessageList.add(message);
