@@ -8,8 +8,6 @@ public class Group {
     private String admin;
     private int numberOfParticipants;
 
-    List<User> userList;
-    List<Message> messageList;
 
     public Group() {
     }
@@ -18,9 +16,7 @@ public class Group {
         this.name=grpName;
         this.numberOfParticipants=numberOfParticipants;
     }
-    public Group(List<User> userList) {
-        this.userList = userList;
-    }
+
 
     public String getAdmin() {
         return admin;
@@ -30,27 +26,6 @@ public class Group {
         this.admin = admin;
     }
 
-
-
-
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-
-
-
-    public List<Message> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
 
     public String getName() {
         return name;

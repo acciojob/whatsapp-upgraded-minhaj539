@@ -6,15 +6,9 @@ public class User {
     private String name;
     private String mobile;
 
-    List<Message> messageList;
 
-    public List<Message> getMessageList() {
-        return messageList;
-    }
 
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
+
 
     public User(String name, String mobile) {
         this.name = name;

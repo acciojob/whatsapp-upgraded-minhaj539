@@ -111,7 +111,6 @@ public class WhatsappRepository {
       if(user.getName().equals(grpAdmin)) throw new Exception("user is admin");
 
       User newAdmin=userList.get();
-
       */
 
         return null;
