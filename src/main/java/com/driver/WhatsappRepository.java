@@ -38,7 +38,7 @@ public class WhatsappRepository {
         }
         else{
             groupCnt++;
-            grpName="group "+groupCnt;
+            grpName="Group "+groupCnt;
         }
         Group group=new Group(grpName,users.size());
         group.setAdmin(users.get(0).getName());
@@ -107,7 +107,7 @@ public class WhatsappRepository {
 
     public int removeUser(User user) throws Exception {
 
-            for(Group group:groupDb.values()){
+         /*   for(Group group:groupDb.values()){
             List<User> userList=group.getUserList();
             for(User userx:userList){
                 if(user.equals(userx)){
@@ -130,8 +130,50 @@ public class WhatsappRepository {
                 }
             }
         }
-        throw new Exception("user not found");
+        throw new Exception("user not found");*/
         //return 0;
+        int cnt=0;
+        boolean isPresent=false;
+        for(Group group:groupDb.values()){
+            List<User> userList=group.getUserList();
+            for(User userInList:userList){
+                if(user.equals(userInList)){
+                    isPresent=true;
+                    if(userInList.getName().equals(group.getAdmin())){
+                        throw new Exception("Cannot remove admin");
+                    }
+                    else{
+                        List<Message> userMessages=user.getMessageList();
+                        List<Message> groupMessages=group.getMessageList();
+                        for(int i=0;i<messageDb.size();i++){
+                            for(int j=0;j<userMessages.size();j++)
+                            if(messageDb.get(i).equals(userMessages.get(j))){
+                                messageDb.remove(i);
+                            }
+                        }
+                        for(int i=0;i<groupMessages.size();i++){
+
+                            for(int j=0;j<userMessages.size();j++)
+                                if(groupMessages.get(i).equals(userMessages.get(j))){
+                                    groupMessages.remove(i);
+                                }
+                        }
+                        group.setMessageList(groupMessages);
+
+                        for(int i=0;i<userList.size();i++){
+                            if(userList.get(i).equals(user))
+                                userList.remove(i);
+                            group.setUserList(userList);
+                            groupDb.put(group.getName(), group);
+                        }
+                      cnt+=messageDb.size()+group.getMessageList().size()+group.getUserList().size();
+                    }
+                }
+
+            }
+        }
+        if(isPresent==false) throw new Exception("User not found");
+        return cnt;
     }
 
     public String findMessage(Date start, Date end, int k) {
