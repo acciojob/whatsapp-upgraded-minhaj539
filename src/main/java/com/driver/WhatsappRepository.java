@@ -21,7 +21,9 @@ public class WhatsappRepository {
     }
 
     public Group createGroup(List<User> users) {
-      /*  Group group=new Group(users);
+      /*
+      /////  Group group=new Group(users);
+
         group.setNumberOfParticipants(users.size());
         if(users.size()==2) {
             group.setName(users.get(1).getName());
@@ -35,7 +37,7 @@ public class WhatsappRepository {
         }
         group.setAdmin(users.get(0).getName());
         groupDb.put(group.getName(), group);
-        return group;*/
+        return group;////
 
         String grpName;
 
@@ -51,18 +53,22 @@ public class WhatsappRepository {
         group.setUserList(users);
         groupDb.put(grpName,group);
         return group;
+
+       */
+        return null;
     }
 
     public int createMessage(String content) {
-        msgCnt++;
+       /* msgCnt++;
         Message message=new Message(content,msgCnt);
         message.setTimestamp(new Date());
         messageDb.add(message);
-        return msgCnt;
+        return msgCnt;*/
+        return 0;
     }
 
     public int sendMessage(Message messagex, User senderx, Group groupx) throws Exception{
-        int msgId=messagex.getId();
+       /* int msgId=messagex.getId();
         String senderName= senderx.getName();
         String groupName= groupx.getName();
         if (!groupDb.containsKey(groupName)) throw new Exception("group not exist");
@@ -90,11 +96,23 @@ public class WhatsappRepository {
             groupDb.put(groupName,group);
             return messageList.size();
 
+*/
+        return 0;
 
     }
 
-    public String changeAdmin(User approver, User user, Group group) {
+    public String changeAdmin(User approver, User user, Group group) throws Exception {
+     /* String grpName=group.getName();
+      if(!groupDb.containsKey(grpName)) throw new Exception("group not exist");
+      String grpAdmin=group.getAdmin();
+      if(!approver.getName().equals(grpAdmin)) throw new Exception("not an admin");
+      List<User> userList=groupDb.get(grpName).getUserList();
+      if(!userList.contains(user)) throw new Exception("user not exist");
+      if(user.getName().equals(grpAdmin)) throw new Exception("user is admin");
 
+      User newAdmin=userList.get();
+
+      */
 
         return null;
     }
