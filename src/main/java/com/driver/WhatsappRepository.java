@@ -48,7 +48,7 @@ public class WhatsappRepository {
     }
 
     public int sendMessage(Message message, User sender, Group group) throws Exception{
-               String grpName= group.getName();
+     /*          String grpName= group.getName();
             if (!groupDb.containsKey(grpName)) throw new Exception("group not exist");
 
 
@@ -62,7 +62,8 @@ public class WhatsappRepository {
             messageList.add(message);
             group.setMessageList(messageList);
             groupDb.put(grpName,group);
-            return messageList.size();
+            return messageList.size();*/
+        return 0;
 
     }
 
@@ -74,7 +75,7 @@ public class WhatsappRepository {
 
     public int removeUser(User user) throws Exception {
 
-        for(Group group:groupDb.values()){
+        /*    for(Group group:groupDb.values()){
             List<User> userList=group.getUserList();
             for(User userx:userList){
                 if(user.equals(userx)){
@@ -97,7 +98,8 @@ public class WhatsappRepository {
                 }
             }
         }
-        throw new Exception("user not found");
+        throw new Exception("user not found");*/
+        return 0;
     }
 
     public String findMessage(Date start, Date end, int k) {
