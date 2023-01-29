@@ -59,7 +59,7 @@ public class WhatsappRepository {
         int msgId=messagex.getId();
         String senderMob= senderx.getMobile();
         String groupName= groupx.getName();
-        if (!groupDb.containsKey(groupName)) throw new Exception("group does not exist");
+        if (!groupDb.containsKey(groupName)) throw new Exception("Group does not exist");
 
         Message message=messageDb.get(msgId);
         User user=userDb.get(senderMob);
@@ -68,7 +68,7 @@ public class WhatsappRepository {
 
 
             List<User> userList=groupDb.get(groupName).getUserList();
-            if(userList==null || !userList.contains(user))  throw new Exception("user does not exist in group");
+            if(userList==null || !userList.contains(user))  throw new Exception("You are not allowed to send message");
 
             List<Message> userMessageList=user.getMessageList();
             userMessageList.add(message);
